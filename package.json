@@ -18,7 +18,7 @@
     "url": "https://github.com/mauricerkelly/hubot-lunch/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.7.1"
+    "coffee-script": "~1.6.3"
   },
   "main": "index.coffee",
   "homepage": "https://github.com/mauricerkelly/hubot-lunch"
