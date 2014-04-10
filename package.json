@@ -1,0 +1,25 @@
+{
+  "name": "hubot-lunch",
+  "description": "Lunch ordering bot",
+  "version": "0.0.1",
+  "author": "Maurice Kelly <proj-hubot-lunch@chatswood.org.uk>",
+  "license": "MIT",
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "lunch",
+    "order"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mauricerkelly/hubot-lunch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mauricerkelly/hubot-lunch/issues"
+  },
+  "dependencies": {
+    "coffee-script": "~1.7.1"
+  },
+  "main": "index.coffee",
+  "homepage": "https://github.com/mauricerkelly/hubot-lunch"
+}
