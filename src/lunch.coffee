@@ -59,19 +59,23 @@ module.exports = (robot) ->
 
   robot.hear /order me (.*)/i, (msg) ->
     username = msg.message.user.name
-    msg.send "Got it (" + msg.match[1] + ")"
+    msg.send "Ordering " + msg.match[1] + " for " + username
     lunches.add(username, msg.match[1])
     return
 
   robot.hear /order for (.*): (.*)/i, (msg) ->
     username = msg.match[1]
-    msg.send "Got it (" + msg.match[2] + ") for " + username
+    msg.send "Ordering " + msg.match[2] + " for " + username
     lunches.add(username, msg.match[2])
     return
 
   robot.hear /show my order/i, (msg) ->
     username = msg.message.user.name
-    msg.send lunches.get(username) + " (by " + username + ")"
+    order = lunches.get(username)
+    if order == undefined
+      msg.send "You have no order"
+    else
+      msg.send "You (#{username}) ordered: " + lunches.get(username)
     return
 
   robot.hear /show all orders/i, (msg) ->
@@ -83,6 +87,8 @@ module.exports = (robot) ->
 
     if order_list isnt ""
       msg.send order_list
+    else
+      msg.send "There are no orders yet"
     return
 
   robot.hear /clear orders/i, (msg) ->
@@ -92,14 +98,22 @@ module.exports = (robot) ->
 
   robot.hear /cancel my order/i, (msg) ->
     username = msg.message.user.name
-    lunches.cancel(username)
-    msg.send "Done. But you'll be hungry!"
+    order = lunches.get(username)
+    if order == undefined
+      msg.send "You have no order"
+    else
+      lunches.cancel(username)
+      msg.send "Done. But you'll be hungry!"
     return
 
   robot.hear /cancel order for (.*)/i, (msg) ->
     username = msg.match[1]
-    lunches.cancel(username)
-    msg.send "But " + username + " will be hungry! On your head be it!"
+    order = lunches.get(username)
+    if order == undefined
+      msg.send "There is no order for " + username
+    else
+      lunches.cancel(username)
+      msg.send "But " + username + " will be hungry! On your head be it!"
     return
 
   robot.hear /^lunch help$/i, (msg) ->

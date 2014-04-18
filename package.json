@@ -18,8 +18,19 @@
     "url": "https://github.com/mauricerkelly/hubot-lunch/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.6.3"
+    "coffee-script": "^1.7.1"
   },
   "main": "index.coffee",
-  "homepage": "https://github.com/mauricerkelly/hubot-lunch"
+  "homepage": "https://github.com/mauricerkelly/hubot-lunch",
+  "devDependencies": {
+    "hubot": ">=2.7.2",
+    "chai": "~1.9.1",
+    "sinon": "~1.9.0",
+    "sinon-chai": "~2.5.0",
+    "mocha": "~1.18.2",
+    "hubot-mock-adapter": "~1.0.0"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --require coffee-script --compilers coffee:coffee-script/register --reporter spec --recursive ./spec"
+  }
 }
