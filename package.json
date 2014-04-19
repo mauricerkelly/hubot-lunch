@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "coffee-script": "^1.7.1",
-    "log": ">=1.4.0"
+    "winston": ">=0.7.3"
   },
   "main": "index.coffee",
   "homepage": "https://github.com/mauricerkelly/hubot-lunch",
