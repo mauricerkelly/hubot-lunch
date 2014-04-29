@@ -23,6 +23,10 @@
 # Author:
 #   mauricerkelly
 
+log = require('winston')
+level = process.env.LOG_LEVEL || 'warning'
+log.level = level.toLowerCase()
+
 module.exports = (robot) ->
 
   robot.brain.data.lunches =
@@ -31,27 +35,34 @@ module.exports = (robot) ->
 
   lunches =
     get: (name) ->
+      log.debug "Fetching order for #{name}"
       robot.brain.data.lunches.orders[name]
 
     add: (name, order) ->
+      log.debug "Adding order of #{order} for #{name}"
       robot.brain.data.lunches.orders[name] = order
       if name not in robot.brain.data.lunches.last
+        log.debug("Putting #{name} to the end of the order list")
         robot.brain.data.lunches.last.push(name)
 
     all_orders: () ->
+      log.debug "Returning all orders"
       return robot.brain.data.lunches.orders
 
     cancel: (name) ->
+      log.debug "Cancelling order for #{name}"
       delete robot.brain.data.lunches.orders[name]
       user_index = robot.brain.data.lunches.last.indexOf name
       if user_index isnt -1
         robot.brain.data.lunches.last.splice(user_index, 1)
 
     clear: () ->
+      log.debug "Clearing the entire order list"
       robot.brain.data.lunches.orders = {}
       robot.brain.data.lunches.last = []
 
     last_order: () ->
+      log.debug "Fetching the last order"
       robot.brain.data.lunches.last[robot.brain.data.lunches.last.length - 1]
 
     order_count: () ->
